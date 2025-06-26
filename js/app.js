@@ -27,27 +27,27 @@ function loadFromLocalStorage() {
 function showToast(message) {
   const existingToast = document.querySelector('.toast');
   if (existingToast) existingToast.remove();
+
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.textContent = message;
   document.body.appendChild(toast);
+
   setTimeout(() => toast.remove(), 3000);
 }
 
-function formatNumber(number) {
-  return new Intl.NumberFormat('en').format(number);
+function formatNumber(num) {
+  return new Intl.NumberFormat('en').format(num);
 }
-
 function formatCurrency(amount) {
   return formatNumber(Math.round(amount)) + ' ريال';
 }
-
-function formatPercentage(value) {
+function formatPercentage(val) {
   return new Intl.NumberFormat('en', {
     style: 'percent',
     minimumFractionDigits: 1,
     maximumFractionDigits: 1
-  }).format(value);
+  }).format(val);
 }
 
 function calculateMortgage() {
@@ -73,16 +73,18 @@ function calculateMortgage() {
   else dbrWarning.classList.add('hidden');
 }
 
-function debounce(func, wait) {
+// Debounce helper
+function debounce(fn, wait) {
   let timeout;
   return function(...args) {
     clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(this, args), wait);
+    timeout = setTimeout(() => fn(...args), wait);
   };
 }
 
 const debouncedSave = debounce(saveToLocalStorage, 1000);
 
+// Attach listeners
 document.querySelectorAll('input').forEach(input => {
   input.addEventListener('input', () => {
     calculateMortgage();

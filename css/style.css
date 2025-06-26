@@ -1,23 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap');
-
+/* Global */
 body {
   font-family: 'Cairo', sans-serif;
   background-color: #f8fafc;
 }
 
-.input-number {
+/* Inputs */
+.input-field {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   text-align: right !important;
   padding-right: 16px !important;
   padding-left: 80px !important;
-  -moz-appearance: textfield;
+  display: block;
+  width: 100%;
+  padding-top: .875rem;
+  padding-bottom: .875rem;
+  border-radius: .75rem;
+  border: 1px solid #D1D5DB;
+  transition: border-color .2s;
 }
-.input-number::-webkit-inner-spin-button,
-.input-number::-webkit-outer-spin-button {
+.input-field:focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 0 2px rgba(59,130,246,.5);
+}
+.input-field:hover {
+  border-color: #BFDBFE;
+}
+
+/* Hide spinner */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 
+/* Currency label */
 .currency-symbol {
   position: absolute;
   left: 1rem;
@@ -27,11 +47,13 @@ body {
   pointer-events: none;
 }
 
+/* Glass effect panels */
 .glass-effect {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
 }
 
+/* Toast notification */
 .toast {
   position: fixed;
   bottom: 1rem;
@@ -53,6 +75,7 @@ body {
   }
 }
 
+/* Shiny card */
 .card-shine {
   position: relative;
   overflow: hidden;
