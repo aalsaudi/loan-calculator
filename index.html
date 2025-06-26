@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حاسبة القروض والتمويل</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="p-4">
+  <ul class="nav nav-tabs" id="loanTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="tab-personal" data-bs-toggle="tab" data-bs-target="#personal" type="button">قرض شخصي</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="tab-mortgage" data-bs-toggle="tab" data-bs-target="#mortgage" type="button">تمويل عقاري</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="tab-combined" data-bs-toggle="tab" data-bs-target="#combined" type="button">خيار مُدمج</button>
+    </li>
+  </ul>
+
+  <div class="tab-content mt-3">
+    <!-- قرض شخصي -->
+    <div class="tab-pane fade show active" id="personal">
+      <div class="row">
+        <div class="col-md-6">
+          <label>راتبك (ر.س):</label>
+          <input id="p_salary" type="number" class="form-control mb-2" placeholder="مثلاً: 10000">
+
+          <label>معدل الفائدة (% سنوياً):</label>
+          <input id="p_rate" type="number" class="form-control mb-2" value="5">
+
+          <label>عدد السنوات:</label>
+          <input id="p_years" type="number" class="form-control mb-2" value="1">
+
+          <label>نسبة / مبلغ القرض:</label>
+          <input id="p_amount" type="number" class="form-control mb-2" placeholder="≤ 33% من الراتب × السنوات × سعر الفائدة">
+
+          <button onclick="calcPersonal()" class="btn btn-primary">احسب</button>
+        </div>
+        <div class="col-md-6" id="p_results">
+          <!-- هنا ستظهر النتائج -->
+        </div>
+      </div>
+    </div>
+
+    <!-- تمويل عقاري -->
+    <div class="tab-pane fade" id="mortgage">
+      <div class="row">
+        <div class="col-md-6">
+          <label>راتبك (ر.س):</label>
+          <input id="m_salary" type="number" class="form-control mb-2" placeholder="مثلاً: 10000">
+
+          <label>قيمة العقار (ر.س):</label>
+          <input id="m_value" type="number" class="form-control mb-2" placeholder="مثلاً: 500000">
+
+          <label>معدل الفائدة (% سنوياً):</label>
+          <input id="m_rate" type="number" class="form-control mb-2" value="5">
+
+          <label>عدد السنوات:</label>
+          <input id="m_years" type="number" class="form-control mb-2" value="1">
+
+          <label>الدفعة الأولى (ر.س):</label>
+          <input id="m_down" type="number" class="form-control mb-2" placeholder="10% افتراضياً">
+
+          <label>نسبة / مبلغ التمويل:</label>
+          <input id="m_amount" type="number" class="form-control mb-2" placeholder="≤ 65% بعد خصم الدفعة الأولى">
+
+          <button onclick="calcMortgage()" class="btn btn-primary">احسب</button>
+        </div>
+        <div class="col-md-6" id="m_results">
+          <!-- هنا ستظهر النتائج -->
+        </div>
+      </div>
+    </div>
+
+    <!-- خيار مُدمج -->
+    <div class="tab-pane fade" id="combined">
+      <div class="row">
+        <div class="col-md-6">
+          <label>راتبك (ر.س):</label>
+          <input id="c_salary" type="number" class="form-control mb-2">
+
+          <label>قيمة العقار (ر.س):</label>
+          <input id="c_value" type="number" class="form-control mb-2">
+
+          <label>مبلغ القرض الشخصي المستخدم (ر.س):</label>
+          <input id="c_personal_used" type="number" class="form-control mb-2">
+
+          <label>معدل الفائدة العقاري (% سنوياً):</label>
+          <input id="c_rate" type="number" class="form-control mb-2" value="5">
+
+          <label>عدد السنوات:</label>
+          <input id="c_years" type="number" class="form-control mb-2" value="1">
+
+          <label>القسط الشهري للعقاري أول 5 سنوات (ر.س):</label>
+          <input id="c_special_monthly" type="number" class="form-control mb-2">
+
+          <button onclick="calcCombined()" class="btn btn-primary">احسب</button>
+        </div>
+        <div class="col-md-6" id="c_results">
+          <!-- هنا ستظهر النتائج -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
