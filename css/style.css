@@ -1,9 +1,14 @@
 body { font-family: 'Segoe UI', Tahoma, sans-serif; }
-h1, h5 { font-weight: 600; }
 .navbar-brand { color: #007bff; }
 .card { border-radius: 1rem; }
-.card-title { color: #333; }
-.btn-primary { border-radius: 0.5rem; }
-.form-floating .form-control:focus ~ label {
-  color: #007bff;
+.card-body { padding: 2rem; }
+.btn-primary { border-radius: 0.5rem; font-size: 1.1rem; padding: 0.75rem; }
+
+/* Ensure large inputs are user-friendly */
+.form-control-lg {
+  padding: 1rem 0.75rem;
+  font-size: 1.05rem;
 }
+
+/* Consistent card height for results */
+.h-100 { min-height: 350px; }
