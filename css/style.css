@@ -1,12 +1,9 @@
-body {
-  background-color: #f8f9fa;
-}
-label {
-  font-weight: bold;
-}
-#p_results, #m_results, #c_results {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+body { font-family: 'Segoe UI', Tahoma, sans-serif; }
+h1, h5 { font-weight: 600; }
+.navbar-brand { color: #007bff; }
+.card { border-radius: 1rem; }
+.card-title { color: #333; }
+.btn-primary { border-radius: 0.5rem; }
+.form-floating .form-control:focus ~ label {
+  color: #007bff;
 }
