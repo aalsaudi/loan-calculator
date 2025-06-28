@@ -4,7 +4,6 @@ body {
   background-color: #f8fafc;
 }
 
-/* Inputs */
 .input-field {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   text-align: right !important;
@@ -37,7 +36,6 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-/* Currency label */
 .currency-symbol {
   position: absolute;
   left: 1rem;
@@ -47,35 +45,29 @@ input[type="number"] {
   pointer-events: none;
 }
 
-/* Glass effect panels */
 .glass-effect {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255,255,255,0.95);
   backdrop-filter: blur(10px);
 }
 
-/* Toast notification */
 .toast {
   position: fixed;
   bottom: 1rem;
   left: 1rem;
   background: #1f2937;
   color: white;
-  padding: 0.75rem 1rem;
+  padding: .75rem 1rem;
   border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
   z-index: 50;
   opacity: 0;
   transform: translateY(1rem);
-  animation: slideIn 0.3s ease forwards;
+  animation: slideIn .3s ease forwards;
 }
 @keyframes slideIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Shiny card */
 .card-shine {
   position: relative;
   overflow: hidden;
@@ -83,10 +75,8 @@ input[type="number"] {
 .card-shine::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
   background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 80%);
   transform: rotate(45deg);
   pointer-events: none;

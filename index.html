@@ -3,151 +3,461 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>حاسبة التمويل العقاري</title>
-
-  <!-- Tailwind & Google Fonts -->
+  <title>حاسبة التمويل</title>
+  <!-- Tailwind & Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Custom Styles -->
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="min-h-full bg-gradient-to-br from-blue-50 via-white to-blue-50">
+<body class="min-h-full bg-gradient-to-br from-blue-50 via-white to-blue-50 font-Cairo">
+
   <!-- Header -->
   <header class="glass-effect sticky top-0 border-b border-gray-200/80 z-10">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex h-16 items-center justify-between">
-        <div class="flex items-center">
-          <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 text-transparent bg-clip-text">
-            حاسبة التمويل العقاري
-          </span>
-        </div>
-        <div class="hidden sm:block">
-          <span class="text-sm text-gray-500">حاسبة التمويل العقاري</span>
-        </div>
-      </div>
+      <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 text-transparent bg-clip-text">
+        حاسبة التمويل
+      </span>
     </nav>
   </header>
 
-  <!-- Main Content -->
   <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 mb-2">حاسبة التمويل العقاري</h1>
-      <p class="text-lg text-gray-600">احسب قسطك الشهري بدقة وسهولة</p>
+
+    <!-- Tabs -->
+    <div class="flex border-b mb-6">
+      <button id="mortgageTabBtn" class="px-4 py-2 font-medium border-b-2 border-blue-600 text-blue-600">العقاري</button>
+      <button id="personalTabBtn" class="px-4 py-2 font-medium text-gray-600 hover:text-blue-600">الشخصي</button>
+      <button id="comboTabBtn"    class="px-4 py-2 font-medium text-gray-600 hover:text-blue-600">2 في 1</button>
     </div>
 
-    <div class="grid lg:grid-cols-2 gap-8">
-      <!-- Input Section -->
-      <div class="glass-effect rounded-2xl shadow-lg shadow-blue-500/5 border border-gray-200/80 p-6">
-        <div class="space-y-6">
-          <!-- Salary Input -->
+    <!-- Mortgage Tab -->
+    <div id="mortgageTab">
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Inputs -->
+        <div class="glass-effect p-6 rounded-2xl shadow-lg border border-gray-200/80 space-y-6">
+          <!-- Salary -->
           <div>
             <label for="salary" class="block text-sm font-medium text-gray-700 mb-2">الراتب الشهري</label>
             <div class="relative">
-              <input type="number" id="salary" class="input-field" value="10000">
+              <input type="number" id="salary" class="input-field salary-input w-full px-4 py-3.5 rounded-xl border border-gray-300" value="10000">
               <span class="currency-symbol">ريال</span>
             </div>
           </div>
-
-          <!-- Property Price -->
-          <div>
-            <label for="propertyPrice" class="block text-sm font-medium text-gray-700 mb-2">مبلغ العقار</label>
-            <div class="relative">
-              <input type="number" id="propertyPrice" class="input-field" value="1500000">
-              <span class="currency-symbol">ريال</span>
+          <!-- Property Price + Max -->
+          <div class="flex items-center">
+            <div class="flex-1">
+              <label for="propertyPrice" class="block text-sm font-medium text-gray-700 mb-2">مبلغ العقار</label>
+              <div class="relative">
+                <input type="number" id="propertyPrice" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300" value="1500000">
+                <span class="currency-symbol">ريال</span>
+              </div>
             </div>
+            <button id="m_maxBtn" class="mr-2 mt-6 px-3 py-1 bg-blue-600 text-white rounded-md">الحد الأقصى</button>
           </div>
-
           <!-- Down Payment -->
           <div>
             <label for="downPayment" class="block text-sm font-medium text-gray-700 mb-2">الدفعة الأولى</label>
             <div class="relative">
-              <input type="number" id="downPayment" class="input-field" value="150000">
+              <input type="number" id="downPayment" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300" value="150000">
               <span class="currency-symbol">ريال</span>
             </div>
             <div id="downPaymentWarning" class="hidden p-4 rounded-xl bg-red-50 border border-red-100 text-red-800 text-sm mt-2">
               <div class="flex items-center space-x-2 space-x-reverse">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                 </svg>
-                <span>الدفعة الأولية يجب أن تكون أعلى من ١٠ بالمئة من قيمة العقار</span>
+                <span>الدفعة الأولية يجب أن تكون أعلى من ١٠% من قيمة العقار</span>
               </div>
             </div>
           </div>
-
           <!-- Loan Term -->
           <div>
             <label for="loanTerm" class="block text-sm font-medium text-gray-700 mb-2">مدة التمويل</label>
             <div class="relative">
-              <input type="number" id="loanTerm" class="input-field" value="25">
-              <span class="currency-symbol">سنة</span>
+              <select id="loanTerm" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300">
+                <option value="1">1 سنة</option>
+                <option value="2">2 سنة</option>
+                <option value="3">3 سنة</option>
+                <option value="4">4 سنة</option>
+                <option value="5">5 سنة</option>
+                <option value="6">6 سنة</option>
+                <option value="7">7 سنة</option>
+                <option value="8">8 سنة</option>
+                <option value="9">9 سنة</option>
+                <option value="10">10 سنة</option>
+                <option value="11">11 سنة</option>
+                <option value="12">12 سنة</option>
+                <option value="13">13 سنة</option>
+                <option value="14">14 سنة</option>
+                <option value="15">15 سنة</option>
+                <option value="16">16 سنة</option>
+                <option value="17">17 سنة</option>
+                <option value="18">18 سنة</option>
+                <option value="19">19 سنة</option>
+                <option value="20">20 سنة</option>
+                <option value="21">21 سنة</option>
+                <option value="22">22 سنة</option>
+                <option value="23">23 سنة</option>
+                <option value="24">24 سنة</option>
+                <option value="25">25 سنة</option>
+              </select>
             </div>
           </div>
-
           <!-- Interest Rate -->
           <div>
             <label for="interestRate" class="block text-sm font-medium text-gray-700 mb-2">معدل الربح السنوي</label>
             <div class="relative">
-              <input type="number" id="interestRate" step="0.01" class="input-field" value="3.64">
+              <input type="number" id="interestRate" step="0.01" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300" value="3.64">
               <span class="currency-symbol">%</span>
             </div>
           </div>
-
           <!-- DBR Warning -->
           <div id="dbrWarning" class="hidden p-4 rounded-xl bg-red-50 border border-red-100 text-red-800 text-sm">
             <div class="flex items-center space-x-2 space-x-reverse">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
               </svg>
-              <span>نسبة الاستقطاع تتجاوز الحد المسموح (65%). يرجى تعديل قيمة التمويل أو مدة السداد.</span>
+              <span>نسبة الاستقطاع تتجاوز الحد المسموح (65%).</span>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- Results Section -->
-      <div class="space-y-6">
-        <!-- Monthly Payment Card -->
-        <div class="card-shine bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-6 text-white shadow-lg shadow-blue-500/20">
-          <div class="flex items-baseline justify-between mb-2">
-            <h3 class="text-lg font-medium text-blue-100">القسط الشهري</h3>
-            <span id="dbrPercentage" class="bg-white/10 text-blue-100 text-sm px-3 py-1 rounded-lg backdrop-blur-sm"></span>
-          </div>
-          <div id="monthlyPayment" class="text-5xl font-bold mt-2"></div>
+          <!-- Calculate -->
+          <button id="mortgageCalcBtn" class="w-full bg-blue-600 text-white py-2 rounded-lg">احسب النتيجة</button>
         </div>
 
-        <!-- Summary Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="glass-effect rounded-2xl p-5 border border-gray-200/80 transition duration-200 hover:border-blue-200">
-            <span class="text-sm text-gray-600">مبلغ التمويل</span>
-            <div id="loanAmount" class="mt-1 text-xl font-semibold text-gray-900"></div>
+        <!-- Results -->
+        <div id="mortgageResults" class="hidden space-y-6">
+          <!-- Monthly Payment Card -->
+          <div class="card-shine bg-gradient-to-br from-blue-600 to-blue-800 p-6 rounded-2xl text-white shadow-lg shadow-blue-500/20">
+            <div class="flex justify-between items-baseline mb-2">
+              <h3 class="text-lg font-medium text-blue-100">القسط الشهري</h3>
+              <span id="dbrPercentage" class="bg-white/10 text-blue-100 text-sm px-3 py-1 rounded-lg"></span>
+            </div>
+            <div id="monthlyPayment" class="text-5xl font-bold mt-2"></div>
           </div>
-          <div class="glass-effect rounded-2xl p-5 border border-gray-200/80 transition duration-200 hover:border-blue-200">
-            <span class="text-sm text-gray-600">إجمالي الربح</span>
-            <div id="totalInterest" class="mt-1 text-xl font-semibold text-gray-900"></div>
-          </div>
-          <div class="glass-effect rounded-2xl p-5 border border-gray-200/80 transition duration-200 hover:border-blue-200">
-            <span class="text-sm text-gray-600">إجمالي المدفوعات</span>
-            <div id="totalPayment" class="mt-1 text-xl font-semibold text-gray-900"></div>
-          </div>
-          <div class="glass-effect rounded-2xl p-5 border border-gray-200/80 transition duration-200 hover:border-blue-200">
-            <span class="text-sm text-gray-600">الرسوم الإدارية</span>
-            <div id="adminFee" class="mt-1 text-xl font-semibold text-gray-900"></div>
-          </div>
-          <div class="glass-effect rounded-2xl p-5 border border-gray-200/80 transition duration-200 hover:border-blue-200">
-            <span class="text-sm text-gray-600">إجمالي تكلفة التمويل</span>
-            <div id="totalCost" class="mt-1 text-xl font-semibold text-gray-900"></div>
-          </div>
-          <div class="glass-effect rounded-2xl p-5 border border-gray-200/80 transition duration-200 hover:border-blue-200">
-            <span class="text-sm text-gray-600">عدد الأقساط</span>
-            <div id="numberOfPayments" class="mt-1 text-xl font-semibold text-gray-900"></div>
+          <!-- Summary Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="glass-effect p-5 rounded-2xl border border-gray-200/80">
+              <span class="text-sm text-gray-600">مبلغ التمويل</span>
+              <div id="loanAmount" class="mt-1 text-xl font-semibold text-gray-900"></div>
+            </div>
+            <div class="glass-effect p-5 rounded-2xl border border-gray-200/80">
+              <span class="text-sm text-gray-600">إجمالي الربح</span>
+              <div id="totalInterest" class="mt-1 text-xl font-semibold text-gray-900"></div>
+            </div>
+            <div class="glass-effect p-5 rounded-2xl border border-gray-200/80">
+              <span class="text-sm text-gray-600">إجمالي المدفوعات</span>
+              <div id="totalPayment" class="mt-1 text-xl font-semibold text-gray-900"></div>
+            </div>
+            <div class="glass-effect p-5 rounded-2xl border border-gray-200/80">
+              <span class="text-sm text-gray-600">الرسوم الإدارية</span>
+              <div id="adminFee" class="mt-1 text-xl font-semibold text-gray-900"></div>
+            </div>
+            <div class="glass-effect p-5 rounded-2xl border border-gray-200/80">
+              <span class="text-sm text-gray-600">إجمالي تكلفة التمويل</span>
+              <div id="totalCost" class="mt-1 text-xl font-semibold text-gray-900"></div>
+            </div>
+            <div class="glass-effect p-5 rounded-2xl border border-gray-200/80">
+              <span class="text-sm text-gray-600">عدد الأقساط</span>
+              <div id="numberOfPayments" class="mt-1 text-xl font-semibold text-gray-900"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Personal Tab -->
+    <div id="personalTab" class="hidden">
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Inputs -->
+        <div class="glass-effect p-6 rounded-2xl shadow-lg border border-gray-200/80 space-y-6">
+          <div>
+            <label for="p_salary" class="block text-sm font-medium text-gray-700 mb-2">الراتب الشهري</label>
+            <div class="relative">
+              <input type="number" id="p_salary" class="input-field salary-input w-full px-4 py-3.5 rounded-xl border border-gray-300" value="10000">
+              <span class="currency-symbol">ريال</span>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="flex-1">
+              <label for="p_propertyPrice" class="block text-sm font-medium text-gray-700 mb-2">مبلغ القرض</label>
+              <div class="relative">
+                <input type="number" id="p_propertyPrice" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300" value="50000">
+                <span class="currency-symbol">ريال</span>
+              </div>
+            </div>
+            <button id="p_maxBtn" class="mr-2 mt-6 px-3 py-1 bg-blue-600 text-white rounded-md">الحد الأقصى</button>
+          </div>
+          <div>
+            <label for="p_loanTerm" class="block text-sm font-medium text-gray-700 mb-2">مدة القرض</label>
+            <div class="relative">
+              <select id="p_loanTerm" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300">
+                <option value="1">1 سنة</option>
+                <option value="2">2 سنة</option>
+                <option value="3">3 سنة</option>
+                <option value="4">4 سنة</option>
+                <option value="5">5 سنة</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="p_interestRate" class="block text-sm font-medium text-gray-700 mb-2">معدل الربح السنوي</label>
+            <div class="relative">
+              <input type="number" id="p_interestRate" step="0.01" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300" value="5.5">
+              <span class="currency-symbol">%</span>
+            </div>
+          </div>
+          <div id="p_dbrWarning" class="hidden p-4 rounded-xl bg-red-50 border border-red-100 text-red-800 text-sm">
+            <div class="flex items-center space-x-2 space-x-reverse">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+              </svg>
+              <span>نسبة الاستقطاع تتجاوز الحد المسموح (33.33%).</span>
+            </div>
+          </div>
+          <button id="personalCalcBtn" class="w-full bg-blue-600 text-white py-2 rounded-lg">احسب النتيجة</button>
+        </div>
+        <!-- Results -->
+        <div id="personalResults" class="hidden space-y-6">
+          <div class="card-shine bg-gradient-to-br from-green-600 to-green-800 p-6 rounded-2xl text-white shadow-lg">
+            <div class="flex justify-between items-baseline mb-2">
+              <h3 class="text-lg font-medium text-green-100">القسط الشهري</h3>
+              <span id="p_dbrPercentage" class="bg-white/10 text-green-100 text-sm px-3 py-1 rounded-lg"></span>
+            </div>
+            <div id="p_monthlyPayment" class="text-5xl font-bold mt-2"></div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="glass-effect p-5 rounded-2xl border border-gray-200/80">
+              <span class="text-sm text-gray-600">مبلغ القرض</span>
+              <div id="p_loanAmount" class="mt-1 text-xl font-semibold text-gray-900"></div>
+            </div>
+            <div class="glass-effect p-5 rounded-2xl border border-gray-200/80">
+              <span class="text-sm text-gray-600">إجمالي الربح</span>
+              <div id="p_totalInterest" class="mt-1 text-xl font-semibold text-gray-900"></div>
+            </div>
+            <div class="glass-effect p-5 rounded-2xl border border-gray-200/80">
+              <span class="text-sm text-gray-600">إجمالي المدفوعات</span>
+              <div id="p_totalPayment" class="mt-1 text-xl font-semibold text-gray-900"></div>
+            </div>
+            <div class="glass-effect p-5 rounded-2xl border border-gray-200/80">
+              <span class="text-sm text-gray-600">الرسوم الإدارية</span>
+              <div id="p_adminFee" class="mt-1 text-xl font-semibold text-gray-900"></div>
+            </div>
+            <div class="glass-effect p-5 rounded-2xl border border-gray-200/80">
+              <span class="text-sm text-gray-600">إجمالي التكلفة</span>
+              <div id="p_totalCost" class="mt-1 text-xl font-semibold text-gray-900"></div>
+            </div>
+            <div class="glass-effect p-5 rounded-2xl border border-gray-200/80">
+              <span class="text-sm text-gray-600">عدد الأقساط</span>
+              <div id="p_numberOfPayments" class="mt-1 text-xl font-semibold text-gray-900"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Combo 2-in-1 Tab -->
+    <div id="comboTab" class="hidden">
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Inputs -->
+        <div class="glass-effect p-6 rounded-2xl shadow-lg border border-gray-200/80 space-y-6">
+          <!-- Salary -->
+          <div>
+            <label for="salary" class="block text-sm font-medium text-gray-700 mb-2">الراتب الشهري</label>
+            <div class="relative">
+              <input type="number" id="salary" class="input-field salary-input w-full px-4 py-3.5 rounded-xl border border-gray-300" value="10000">
+              <span class="currency-symbol">ريال</span>
+            </div>
+          </div>
+          <!-- Personal Loan + Max -->
+          <div class="flex items-center">
+            <div class="flex-1">
+              <label for="c_personalPrice" class="block text-sm font-medium text-gray-700 mb-2">مبلغ التمويل الشخصي</label>
+              <div class="relative">
+                <input type="number" id="c_personalPrice" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300" value="50000">
+                <span class="currency-symbol">ريال</span>
+              </div>
+            </div>
+            <button id="c_pMaxBtn" class="mr-2 mt-6 px-3 py-1 bg-blue-600 text-white rounded-md">الحد الأقصى</button>
+          </div>
+          <!-- Personal Term -->
+          <div>
+            <label for="c_personalTerm" class="block text-sm font-medium text-gray-700 mb-2">مدة التمويل الشخصي</label>
+            <div class="relative">
+              <select id="c_personalTerm" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300">
+                <option value="1">1 سنة</option>
+                <option value="2">2 سنة</option>
+                <option value="3">3 سنة</option>
+                <option value="4">4 سنة</option>
+                <option value="5">5 سنة</option>
+              </select>
+            </div>
+          </div>
+          <!-- Personal Rate -->
+          <div>
+            <label for="c_personalRate" class="block text-sm font-medium text-gray-700 mb-2">معدل الربح الشخصي</label>
+            <div class="relative">
+              <input type="number" id="c_personalRate" step="0.01" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300" value="5.5">
+              <span class="currency-symbol">%</span>
+            </div>
+          </div>
+          <!-- Personal DBR Warning -->
+          <div id="c_pWarning" class="hidden p-4 rounded-xl bg-red-50 border border-red-100 text-red-800 text-sm">
+            <div class="flex items-center space-x-2 space-x-reverse">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486... clip-rule="evenodd"/>
+              </svg>
+              <span>القسط الشهري الشخصي يتجاوز 33.33% من الراتب.</span>
+            </div>
+          </div>
+          <!-- Combo general DBR warning -->
+<div id="c_warning" class="hidden p-4 rounded-xl bg-red-50 border border-red-100 text-red-800 text-sm mb-2">
+  <div class="flex items-center space-x-2 space-x-reverse">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+    </svg>
+    <span>مجموع الأقساط يتجاوز 65% من الراتب.</span>
+  </div>
+</div>
+
+          <!-- Contribution from Personal + Max -->
+          <div class="flex items-center">
+            <div class="flex-1">
+              <label for="c_personalToMortgage" class="block text-sm font-medium text-gray-700 mb-2">مساهمة التمويل الشخصي في الدفعة الأولى</label>
+              <div class="relative">
+                <input type="number" id="c_personalToMortgage" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300" value="0">
+                <span class="currency-symbol">ريال</span>
+              </div>
+            </div>
+            <button id="c_toDownMaxBtn" class="mr-2 mt-6 px-3 py-1 bg-blue-600 text-white rounded-md">الكل</button>
+          </div>
+          <!-- Mortgage Amount + Max -->
+          <div class="flex items-center">
+            <div class="flex-1">
+              <label for="c_propertyPrice" class="block text-sm font-medium text-gray-700 mb-2">مبلغ العقار</label>
+              <div class="relative">
+                <input type="number" id="c_propertyPrice" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300" value="1500000">
+                <span class="currency-symbol">ريال</span>
+              </div>
+            </div>
+            <button id="c_mMaxBtn" class="mr-2 mt-6 px-3 py-1 bg-blue-600 text-white rounded-md">الحد الأقصى</button>
+          </div>
+          <!-- Down Payment -->
+          <div>
+            <label for="c_downPayment" class="block text-sm font-medium text-gray-700 mb-2">الدفعة الأولى</label>
+            <div class="relative">
+              <input type="number" id="c_downPayment" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300" value="0">
+              <span class="currency-symbol">ريال</span>
+            </div>
+          </div>
+          <!-- Mortgage Term -->
+          <div>
+            <label for="c_mortgageTerm" class="block text-sm font-medium text-gray-700 mb-2">مدة التمويل العقاري</label>
+            <div class="relative">
+              <select id="c_mortgageTerm" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300">
+                <option value="1">1 سنة</option>
+                <option value="2">2 سنة</option>
+                <option value="3">3 سنة</option>
+                <option value="4">4 سنة</option>
+                <option value="5">5 سنة</option>
+                <option value="6">6 سنة</option>
+                <option value="7">7 سنة</option>
+                <option value="8">8 سنة</option>
+                <option value="9">9 سنة</option>
+                <option value="10">10 سنة</option>
+                <option value="11">11 سنة</option>
+                <option value="12">12 سنة</option>
+                <option value="13">13 سنة</option>
+                <option value="14">14 سنة</option>
+                <option value="15">15 سنة</option>
+                <option value="16">16 سنة</option>
+                <option value="17">17 سنة</option>
+                <option value="18">18 سنة</option>
+                <option value="19">19 سنة</option>
+                <option value="20">20 سنة</option>
+                <option value="21">21 سنة</option>
+                <option value="22">22 سنة</option>
+                <option value="23">23 سنة</option>
+                <option value="24">24 سنة</option>
+                <option value="25">25 سنة</option>
+              </select>
+            </div>
+          </div>
+          <!-- Mortgage Rate -->
+          <div>
+            <label for="c_mortgageRate" class="block text-sm font-medium text-gray-700 mb-2">معدل الربح العقاري</label>
+            <div class="relative">
+              <input type="number" id="c_mortgageRate" step="0.01" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300" value="3.64">
+              <span class="currency-symbol">%</span>
+            </div>
+          </div>
+          <!-- Monthly Cap -->
+          <div>
+            <label for="c_monthlyCap" class="block text-sm font-medium text-gray-700 mb-2">القسط الشهري للتمويل العقاري</label>
+            <div class="relative">
+              <input type="number" id="c_monthlyCap" class="input-field w-full px-4 py-3.5 rounded-xl border border-gray-300" value="0">
+              <span class="currency-symbol">ريال</span>
+            </div>
+          </div>
+          <!-- Combo Calculate -->
+          <button id="comboCalcBtn" class="w-full bg-blue-600 text-white py-2 rounded-lg">احسب النتيجة</button>
+        </div>
+
+        <!-- Results -->
+        <div id="comboResults" class="hidden space-y-6">
+          <!-- First-years contributions -->
+          <div class="card-shine bg-gradient-to-br from-purple-600 to-purple-800 p-6 rounded-2xl text-white shadow-lg shadow-purple-500/20">
+            <h3 class="text-xl font-medium mb-4">القسط الشهري للسنوات الأولى</h3>
+            <div class="space-y-2">
+              <div>– من التمويل الشخصي: <span id="c_personalMonthlyFirst"></span></div>
+              <div>– من التمويل العقاري: <span id="c_mortgageMonthlyFirst"></span></div>
+              <div>– الإجمالي:            <span id="c_firstCombined"></span></div>
+            </div>
+          </div>
+          <!-- Remaining mortgage -->
+          <div class="card-shine bg-gradient-to-br from-indigo-600 to-indigo-800 p-6 rounded-2xl text-white shadow-lg shadow-indigo-500/20">
+            <h3 class="text-xl font-medium mb-4">القسط المتبقي بعد السنوات الأولى</h3>
+            <div>– من التمويل العقاري: <span id="c_remainingMonthly"></span></div>
+          </div>
+          <!-- Detailed breakdown -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="glass-effect p-5 rounded-2xl border border-gray-200/80">
+              <h4 class="font-semibold mb-2">تفاصيل التمويل الشخصي</h4>
+              <ul class="space-y-1 text-gray-800">
+                <li>مبلغ التمويل:       <span id="c_personalAmountTotal"></span></li>
+                <li>إجمالي الربح:        <span id="c_personalTotalInterest"></span></li>
+                <li>إجمالي المدفوعات:    <span id="c_personalTotalPayment"></span></li>
+                <li>الرسوم الإدارية:      <span id="c_personalAdminFee"></span></li>
+                <li>إجمالي التكلفة:       <span id="c_personalTotalCost"></span></li>
+                <li>عدد الأقساط:         <span id="c_personalNumPayments"></span></li>
+              </ul>
+            </div>
+            <div class="glass-effect p-5 rounded-2xl border border-gray-200/80">
+              <h4 class="font-semibold mb-2">تفاصيل التمويل العقاري</h4>
+              <ul class="space-y-1 text-gray-800">
+                <li>مبلغ التمويل:       <span id="c_mortgageAmountTotal"></span></li>
+                <li>إجمالي الربح:        <span id="c_mortgageTotalInterest"></span></li>
+                <li>إجمالي المدفوعات:    <span id="c_mortgageTotalPayment"></span></li>
+                <li>الرسوم الإدارية:      <span id="c_mortgageAdminFee"></span></li>
+                <li>إجمالي التكلفة:       <span id="c_mortgageTotalCost"></span></li>
+                <li>عدد الأقساط:         <span id="c_mortgageNumPayments"></span></li>
+              </ul>
+            </div>
+            <div class="glass-effect p-5 rounded-2xl border border-gray-200/80">
+              <h4 class="font-semibold mb-2">تفاصيل التمويل الإجمالي</h4>
+              <ul class="space-y-1 text-gray-800">
+                <li>مبلغ التمويل الإجمالي:       <span id="c_totalAmountAll"></span></li>
+                <li>إجمالي الربح الإجمالي:       <span id="c_totalInterestAll"></span></li>
+                <li>إجمالي المدفوعات الإجمالية:  <span id="c_totalPaymentAll"></span></li>
+                <li>الرسوم الإدارية الإجمالية:    <span id="c_totalAdminFeeAll"></span></li>
+                <li>إجمالي التكلفة الإجمالية:     <span id="c_totalCostAll"></span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
 
-  <!-- Custom Script -->
   <script src="js/app.js"></script>
 </body>
 </html>
